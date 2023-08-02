@@ -21,9 +21,6 @@ public class UtenteModel {
     @NotEmpty
     private String cognome;
 
-    @NotEmpty
-    private String password;
-
     public Integer getId() {
         return id;
     }
@@ -46,14 +43,6 @@ public class UtenteModel {
 
     public void setCognome(String cognome) {
         this.cognome = cognome;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
 }
