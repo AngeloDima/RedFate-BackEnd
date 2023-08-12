@@ -13,7 +13,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.store.shop.Felpe.FelpeModel;
 
 @RestController
 @CrossOrigin
@@ -29,34 +33,34 @@ public class PantaloniController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PantaloniModel> getFelpeById(@PathVariable("id") Integer id) {
-        Optional<PantaloniModel> optionalFelpe = pantaloniRepository.findById(id);
+    public ResponseEntity<PantaloniModel> getPantaloniById(@PathVariable("id") Integer id) {
+        Optional<PantaloniModel> optionalPantaloni = pantaloniRepository.findById(id);
 
-        if (optionalFelpe.isPresent()) {
-            PantaloniModel felpe = optionalFelpe.get();
-            return ResponseEntity.ok(felpe);
+        if (optionalPantaloni.isPresent()) {
+            PantaloniModel Pantaloni = optionalPantaloni.get();
+            return ResponseEntity.ok(Pantaloni);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @PostMapping("/create")
-    public PantaloniModel createFelpe(@RequestBody PantaloniModel felpe) {
-        return pantaloniRepository.save(felpe);
+    public PantaloniModel createPantaloni(@RequestBody PantaloniModel Pantaloni) {
+        return pantaloniRepository.save(Pantaloni);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PantaloniModel> updateFelpe(@PathVariable("id") Integer id,
-            @RequestBody PantaloniModel updatedFelpe) {
-        Optional<PantaloniModel> optionalFelpe = pantaloniRepository.findById(id);
+    public ResponseEntity<PantaloniModel> updatePantaloni(@PathVariable("id") Integer id,
+            @RequestBody PantaloniModel updatePantaloni) {
+        Optional<PantaloniModel> optionalPantaloni = pantaloniRepository.findById(id);
 
-        if (optionalFelpe.isPresent()) {
-            PantaloniModel existingFelpe = optionalFelpe.get();
-            existingFelpe.setTitolo(updatedFelpe.getTitolo());
-            existingFelpe.setDescrizione(updatedFelpe.getDescrizione());
-            existingFelpe.setPrezzo(updatedFelpe.getPrezzo());
+        if (optionalPantaloni.isPresent()) {
+            PantaloniModel existingPantaloni = optionalPantaloni.get();
+            existingPantaloni.setTitolo(updatePantaloni.getTitolo());
+            existingPantaloni.setDescrizione(updatePantaloni.getDescrizione());
+            existingPantaloni.setPrezzo(updatePantaloni.getPrezzo());
 
-            PantaloniModel updated = pantaloniRepository.save(existingFelpe);
+            PantaloniModel updated = pantaloniRepository.save(existingPantaloni);
             return ResponseEntity.ok(updated);
         } else {
             return ResponseEntity.notFound().build();
@@ -64,10 +68,10 @@ public class PantaloniController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteFelpe(@PathVariable("id") Integer id) {
-        Optional<PantaloniModel> optionalFelpe = pantaloniRepository.findById(id);
+    public ResponseEntity<Void> deletePantaloni(@PathVariable("id") Integer id) {
+        Optional<PantaloniModel> optionalPantaloni = pantaloniRepository.findById(id);
 
-        if (optionalFelpe.isPresent()) {
+        if (optionalPantaloni.isPresent()) {
             pantaloniRepository.deleteById(id);
             return ResponseEntity.noContent().build();
         } else {
