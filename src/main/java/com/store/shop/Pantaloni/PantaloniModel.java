@@ -6,9 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
+import java.util.Base64;
+
 import org.springframework.web.multipart.MultipartFile;
 
 @Entity
@@ -29,6 +34,26 @@ public class PantaloniModel {
     @Min(5)
     private Integer prezzo;
 
+    @Lob
+    private byte[] immagine;
+
+    @Transient
+    private String immagineBase64;
+
+    public byte[] getImmagine() {
+        return immagine;
+    }
+
+    public void setImmagine(byte[] immagine) {
+        this.immagine = immagine;
+    }
+
+    public String getImmagineBase64() {
+        if (immagine != null && immagine.length > 0) {
+            immagineBase64 = Base64.getEncoder().encodeToString(immagine);
+        }
+        return immagineBase64;
+    }
     // GET E SET
 
     public Integer getId() {
