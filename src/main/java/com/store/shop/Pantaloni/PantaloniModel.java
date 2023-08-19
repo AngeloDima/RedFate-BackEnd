@@ -87,4 +87,5 @@ public class PantaloniModel {
     public void setPrezzo(Integer prezzo) {
         this.prezzo = prezzo;
     }
+
 }
